@@ -133,7 +133,7 @@ namespace OrbitHud
         private void preparePeriapsis(Orbit o)
         {
             string timeToPer = formatTimespan(TimeSpan.FromSeconds(o.timeToPe));
-            this.periapsis.value = Math.Floor(o.PeA).ToString("#,##0") + "m (" + timeToPer + ")";
+            this.periapsis.value = printHeight(Math.Floor(o.PeA))+ "(" + timeToPer + ")";
         }
 
         private string formatTimespan(TimeSpan t)
@@ -172,6 +172,21 @@ namespace OrbitHud
             GUILayout.Label(item.label, item.labelStyle, colA);
             GUILayout.Label(item.value, item.valueStyle, colB);
             GUILayout.EndHorizontal();
+        }
+
+        private string printHeight(double height)
+        {
+            if (height > 1000000000000)
+                return (height / 1000000000000).ToString("0.00") + "tr";
+            else if (height > 1000000000)
+                return (height / 1000000000).ToString("0.00") + "b";
+            else if (height > 1000000)
+                return (height / 1000000).ToString("0.00") + "m";
+            else if (height > 1000)
+                return (height / 1000).ToString("0.00") + "k";
+            else
+                return height.ToString();
+
         }
 
         private void buildBackground()
