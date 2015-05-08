@@ -165,7 +165,7 @@ namespace OrbitHud
         // a helper that re-paints a line in the dispaly area
         private void printDisplayItem(DisplayItem item)
         {
-            int divider = 60; // the point on screen to stop column one and start column two
+            int divider = 65; // the point on screen to stop column one and start column two
             GUILayoutOption colA = GUILayout.Width(divider);
             GUILayoutOption colB = GUILayout.Width(width - divider);
             GUILayout.BeginHorizontal();
