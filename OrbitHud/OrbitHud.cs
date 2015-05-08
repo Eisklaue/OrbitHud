@@ -21,7 +21,7 @@ namespace OrbitHud
         // The screen boundaries we print everything to
         private static float left = (Screen.width / 2) - 450;
         private static float top = Screen.height - 100;
-        private static float width = 220;
+        private static float width = 230;
         private static float height = 75;
 
         // the level of transparency from 0 (see through) to 1 (opaque)
