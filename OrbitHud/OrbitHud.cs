@@ -52,7 +52,6 @@ namespace OrbitHud
             {
                 showGUI = !showGUI;
             }
-
         }
 
 
