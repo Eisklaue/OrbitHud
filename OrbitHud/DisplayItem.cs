@@ -20,7 +20,7 @@ namespace OrbitHud
 
             this.valueStyle.normal.textColor = Color.green;
             this.valueStyle.alignment = TextAnchor.MiddleLeft;
-            this.valueStyle.padding.left = 10;
+            this.valueStyle.padding.left = 2;
 
             this.labelStyle.normal.textColor = Color.green;
             this.labelStyle.alignment = TextAnchor.MiddleRight;

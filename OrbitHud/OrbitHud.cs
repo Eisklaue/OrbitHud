@@ -15,14 +15,14 @@ namespace OrbitHud
         private DisplayItem apoapsis = new DisplayItem("Apoapsis:");
         private DisplayItem periapsis = new DisplayItem("Periapsis:");
         //private DisplayItem altitude = new DisplayItem("Altitude (sea level):");
-        private DisplayItem altitudeR = new DisplayItem("Altitude:");
+        //private DisplayItem altitudeR = new DisplayItem("Altitude:");
         private DisplayItem biome = new DisplayItem("Biome:");
 
         // The screen boundaries we print everything to
-        private static float left = (Screen.width / 2) - 600;
-        private static float top = Screen.height - 135;
-        private static float width = 360;
-        private static float height = 105;
+        private static float left = (Screen.width / 2) - 450;
+        private static float top = Screen.height - 100;
+        private static float width = 220;
+        private static float height = 75;
 
         // the level of transparency from 0 (see through) to 1 (opaque)
         private static float transparency = 0.6f;
@@ -76,7 +76,7 @@ namespace OrbitHud
         {
             if (FlightGlobals.ActiveVessel != null && showGUI)
             {
-                layoutArea = GUILayout.Window(1004, layoutArea, paintWindow, "KData - Flight Instruments");
+                layoutArea = GUILayout.Window(1004, layoutArea, paintWindow, "Orbit Hud");
             }
         }
 
@@ -127,13 +127,13 @@ namespace OrbitHud
         private void prepareApoapsis(Orbit o)
         {
             string timeToAp = formatTimespan(TimeSpan.FromSeconds(o.timeToAp));
-            this.apoapsis.value = Math.Floor(o.ApA).ToString("#,##0") + "m (" + timeToAp + ")";
+            this.apoapsis.value = printHeight(o.ApA) + " (" + timeToAp + ")";
         }
 
         private void preparePeriapsis(Orbit o)
         {
             string timeToPer = formatTimespan(TimeSpan.FromSeconds(o.timeToPe));
-            this.periapsis.value = printHeight(Math.Floor(o.PeA))+ "(" + timeToPer + ")";
+            this.periapsis.value = printHeight(o.PeA) + " (" + timeToPer + ")";
         }
 
         private string formatTimespan(TimeSpan t)
@@ -165,7 +165,7 @@ namespace OrbitHud
         // a helper that re-paints a line in the dispaly area
         private void printDisplayItem(DisplayItem item)
         {
-            int divider = 125; // the point on screen to stop column one and start column two
+            int divider = 60; // the point on screen to stop column one and start column two
             GUILayoutOption colA = GUILayout.Width(divider);
             GUILayoutOption colB = GUILayout.Width(width - divider);
             GUILayout.BeginHorizontal();
@@ -176,16 +176,14 @@ namespace OrbitHud
 
         private string printHeight(double height)
         {
-            if (height > 1000000000000)
-                return (height / 1000000000000).ToString("0.00") + "tr";
-            else if (height > 1000000000)
-                return (height / 1000000000).ToString("0.00") + "b";
+            if (height > 1000000000)
+                return Math.Floor(height / 1000000).ToString("#,##0") + "M";
             else if (height > 1000000)
-                return (height / 1000000).ToString("0.00") + "m";
-            else if (height > 1000)
-                return (height / 1000).ToString("0.00") + "k";
-            else
-                return height.ToString();
+                return Math.Floor(height / 1000).ToString("#,##0") + "K";
+            else if (height <= 0)
+                return "0 m";
+
+            return height.ToString("#,##0") + "m";
 
         }
 
