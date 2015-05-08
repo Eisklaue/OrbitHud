@@ -75,7 +75,7 @@ namespace OrbitHud
         {
             if (FlightGlobals.ActiveVessel != null && showGUI)
             {
-                layoutArea = GUILayout.Window(1004, layoutArea, paintWindow, "Orbit Hud");
+                layoutArea = GUILayout.Window(1004, layoutArea, paintWindow, "Orbit Hud " + DateTime.Now.ToString("HH:mm"));
             }
         }
 
